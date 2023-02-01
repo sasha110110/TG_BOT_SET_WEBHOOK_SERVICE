@@ -1,10 +1,13 @@
 import telegram
 from telegram.ext import Updater , CommandHandler , Filters , MessageHandler
 from telegram import ParseMode
+
+import os
+
+import requests
 from flask import Flask, request
 from flask_wtf import FlaskForm
-from wtforms import (StringField, TextAreaField, IntegerField, BooleanField,
-                     RadioField)
+from wtforms import StringField, TextAreaField, IntegerField, SubmitField
 from wtforms.validators import InputRequired, Length
 
 
@@ -13,8 +16,8 @@ from wtforms.validators import InputRequired, Length
 app = Flask(__name__)
 
 class SetBotForm(FlaskForm):
-    host=StringField("ХОСТ", [validators.DataRequired()])
-    bot_token = StringtField("ТОКЕН бота", [validators.DataRequired()])
+    host=StringField("ХОСТ", [InputRequired()])
+    bot_token = StringField("ТОКЕН бота", [InputRequired()])
     submit = SubmitField("Send")
 
 
@@ -44,5 +47,4 @@ def set_bot():
         
         
     return render_template('index.html', form=form)
-
 #app.run(debug=True)
