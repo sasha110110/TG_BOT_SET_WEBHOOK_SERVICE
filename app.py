@@ -1,18 +1,48 @@
+import telegram
+from telegram.ext import Updater , CommandHandler , Filters , MessageHandler
+from telegram import ParseMode
 from flask import Flask, request
-import json
+from flask_wtf import FlaskForm
+from wtforms import (StringField, TextAreaField, IntegerField, BooleanField,
+                     RadioField)
+from wtforms.validators import InputRequired, Length
 
-@app.route('/')
-def index():
-    
-    my_html =  '''
-    <html>
-    <body style='background-image: linear-gradient(to right, #d4d3dd, white);'>
-    
-        <h1 style='color: violet'; 'font-size:24'; 'text-align:center';>{update}</h1>
-        <h2> <p><a href="https://tg-resending-bot.vercel.app/set_webhook">Ткни сюда установить вэбхук!!</a></p> </h2>
-  
-    </body>
-    </html>
-    '''
-    
-    return my_html
+
+#updater = Updater(token=TOKEN, use_context=True)
+
+app = Flask(__name__)
+
+class SetBotForm(FlaskForm):
+    host=StringField("ХОСТ", [validators.DataRequired()])
+    bot_token = StringtField("ТОКЕН бота", [validators.DataRequired()])
+    submit = SubmitField("Send")
+
+
+@app.route('/', methods= ["POST", "GET"])
+def set_bot():
+
+    form = SetBotForm()
+    if form.validate_on_submit():
+        HOST=form.host.data
+        TOKEN = form.bot_token.data
+        global bot
+        bot = telegram.Bot(token=TOKEN)
+        #updater = Updater(token=TOKEN, use_context=True)
+        if reqest.form["set"]:
+            bot.deleteWebhook()
+            time.sleep(2)
+            s = bot.setWebhook(f"{HOST}/{TOKEN}")
+            if s:
+                return "Вэбхук успешно установлен! \n"+str(bot.getWebhookInfo())
+            else:
+                return "Не получилось установить вэбхук! Попробуй еще раз."
+        if reqest.form["show"]:
+            return str(bot.getWebhookInfo())
+        if reqest.form["delete"]:
+            bot.deleteWebhook()
+            return "Вэбхук успешно удален!"
+        
+        
+    return render_template('index.html', form=form)
+
+#app.run(debug=True)
