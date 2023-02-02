@@ -49,4 +49,4 @@ def set_bot():
         
     return render_template('index.html', form=form)
 
-app.run(debug=True)
+
