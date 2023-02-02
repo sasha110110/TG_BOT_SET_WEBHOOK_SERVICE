@@ -8,11 +8,8 @@
       {
           "src": "./app.py",
           "use": "@vercel/python"
-      }, 
-     {
-            "src": "./static/images",
-            "use": "@vercel/static"
-        }
+      }
+
   ],
   "routes": [
       {
