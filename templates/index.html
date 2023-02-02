@@ -3,17 +3,18 @@
   <head>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    
     <style>body {
         background-color: #F3EBF6;
-        font-family: 'Ubuntu', sans-serif;
-    }
+            }
     
     .main {
+	position:relative;
+	left:25%;
         background-color: #FFFFFF;
-        width: 600px;
-        height: 300px;
-        margin: 7em auto;
+        width: 670px;
+        height: 340px;
+        margin: 5px 5px 5px;
         border-radius: 1.5em;
         box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
     }
@@ -32,10 +33,11 @@
     font-weight: 700;
     font-size: 14px;
     letter-spacing: 1px;
-    background: rgba(136, 126, 126, 0.04);
+    background: #BFB0C1
+;
     padding: 10px 20px;
     border: none;
-    border-radius: 20px;
+    border-radius: 30px;
     outline: none;
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.02);
@@ -70,16 +72,7 @@
     font-family: 'Ubuntu', sans-serif;
     }
     
-   .box-shadow {
-      font-family: cursive, sans-serif;
-	  position:absolute;
-	  left:25%;
-      
-      color: black;
-      padding: 10px;
-      border-radius: 4px;
-      box-shadow: 2px 2px 20px 23px gray;
-    }
+   
     .un:focus, .pass:focus {
         border: 2px solid rgba(0, 0, 0, 0.18) !important;
         
@@ -101,16 +94,19 @@
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 		display: inline-block;
 		}
-    
+    .submit:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(3px);
+}
 	
 	.reset {
       cursor: pointer;
 	   position: absolute;
        
-  left: 46%;
+        left: 40%;
         border-radius: 5em;
-        color: #fff;
-        background: linear-gradient(to right, gray, #9C27B0);
+        color: black;
+        background: linear-gradient(to light gray, white, #9C27B0);
         border: 0;
         padding-left: 40px;
         padding-right: 40px;
@@ -121,6 +117,11 @@
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 		text-align: center;
 		}
+		
+		.reset:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
     .forgot {
         text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
         color: #E1BEE7;
@@ -142,10 +143,19 @@
             border-radius: 0px;
         }
 		
-		
+	.info{
 
+	color: black;
+        font-weight: bold;
+        font-size: 26px;
+		position:relative;
+	    top:70%;
+		}  
 
-		
+		.details{position:relative;
+		top:70%;
+		left:50%;}
+
         
   </style>
      <link rel="stylesheet" href="css/style.css">
@@ -165,15 +175,13 @@
     <form action='' class="form1" id="setBot" method="POST">
           {{ form.hidden_tag() }}
      <div class="form-group">
-            {{ form.host.label() }}
-            {{ form.host(class="un " type="text" align="center" placeholder="Хост") }}  </div>
+            {{ form.host.label(class="sign") }} {{ form.host(class="un ") }}  </div>
 	  
 	  <div class="form-group">
-            {{ form.bot_token(class="un " type="text" align="center" placeholder="Токен") }} 
-            {{ form.bot_token.label() }} </div>
+	        {{ form.bot_token.label(class="sign") }} {{ form.bot_token(class="un ") }} 
+             </div>
 	  
-     
-	 <br></br>
+    <br></br>
 	  <a class="submit" value="set" data-inline="true">Установить</a>
 	  <a class="submit" value="show" data-inline="true">Показать</a>
 	  <a class="submit" value="delete" data-inline="true">Удалить</a>
@@ -183,26 +191,27 @@
 	  
 	  </div>
    
+  <br></br>
   
   
-  <div class="box-shadow">
-      <p>
-        После установки вэбхука
-        <br />
-        можно обрабатывать POST-запросы по адресу HOST(https://.здесь хост)/TOKEN
-      </p>
-      <p>
-        Ответ:
-         <br />
-        content = json.loads(request.get_data())
-      </p>
-</div>
+  
+ <details class="details">
+    <summary>Инфо</summary>
+  <p>  После установки вэбхука </p>
+        <p>можно обрабатывать POST-запросы по адресу HOST(https://.здесь хост)/TOKEN</p>
+		<p>  Ответ: </p>
+		<p> content = json.loads(request.get_data()) </p>
+</details>
+ 
 
-            
 
 	
 	
-     <script> function clearForm()
+     <script> 
+	 
+
+	 
+	 function clearForm()
 	 {f=document.getElementById("setBot");
 	 f.submit(); f.reset();} </script>
   </body>
