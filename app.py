@@ -1,10 +1,6 @@
 import telegram
 from telegram.ext import Updater , CommandHandler , Filters , MessageHandler
-from telegram import ParseMode
 
-import os
-
-import requests
 from flask import Flask, request, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, IntegerField, SubmitField
