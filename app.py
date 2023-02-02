@@ -5,7 +5,7 @@ from telegram import ParseMode
 import os
 
 import requests
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, IntegerField, SubmitField
 from wtforms.validators import InputRequired, Length
@@ -14,10 +14,11 @@ from wtforms.validators import InputRequired, Length
 #updater = Updater(token=TOKEN, use_context=True)
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'kek'
 
 class SetBotForm(FlaskForm):
-    host=StringField("ХОСТ", [InputRequired()])
-    bot_token = StringField("ТОКЕН бота", [InputRequired()])
+    host=StringField("_ ХОСТ _", [InputRequired()])
+    bot_token = StringField("_ТОКЕН_", [InputRequired()])
     submit = SubmitField("Send")
 
 
@@ -47,4 +48,6 @@ def set_bot():
         
         
     return render_template('index.html', form=form)
+
+
 #app.run(debug=True)
